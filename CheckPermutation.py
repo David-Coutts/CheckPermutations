@@ -3,17 +3,27 @@ Check Permutation: Given two strings, write a method to decide if one is a permu
 
 '''
 
-def getInput():
-	value = raw_input('Enter a value: ')
-	return value
-
 def compareStrings(stringOne, stringTwo):
+	dictOne = {}
+	dictTwo = {}
+
 	if len(stringOne) != len(stringTwo):
-		return False
-	else:
-		if sorted(stringOne) == sorted(stringTwo):
-			return True
-		return False
+		printResult(False)
+
+	for i in stringOne:
+		if i in dictOne:
+			dictOne[i] += 1
+		else:
+			dictOne[i] = 1
+
+	for i in stringTwo:
+		if i in dictTwo:
+			dictTwo[i] += 1
+		else:
+			dictTwo[i] = 1
+
+	printResult(dictOne == dictTwo)
+
 
 def printResult(result):
 	if result:
@@ -23,10 +33,11 @@ def printResult(result):
 
 def main():
 	print("Enter two strings to determine if they're permutations of one another.")
-	stringOne = getInput()
-	stringTwo = getInput()
-	result = compareStrings(stringOne, stringTwo)
-	printResult(result)
+	print("Enter first string:")
+	stringOne = input()
+	print("Enter second string:")
+	stringTwo = input()
+	compareStrings(stringOne, stringTwo)
 
 if __name__ == '__main__':
 	main()
